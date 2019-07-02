@@ -167,6 +167,12 @@ class Tela_Motorista_Inicial extends Component {
                 </TouchableOpacity>
                 </View>
 
+                <View style={{  marginTop: 250}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('tela1')} style={stylesM1.buttomSair}>
+                        <Text style={stylesM1.TextButtom}>Sair</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>     
         )
     }
@@ -189,10 +195,17 @@ class Tela_Motorista_Rota extends Component {
                                 <Text style={stylesM2.TextButtom}>Faltou</Text>
                             </TouchableOpacity>
                         </View>
-                </View>
-                <View style={stylesM2.mapa}>
-                    <Text> Mapa do Motorista aqui </Text>
-                </View>
+
+                        <View style={ stylesM2.buttoms }>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('tela7')} style={stylesM2.buttom2}>
+                                    <Text style={stylesM1.TextButtom}>Voltar</Text>
+                                </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={stylesM2.mapa}>
+                        <Text> Mapa do Motorista aqui </Text>
+                    </View>
+                   
                 </View>
     
         )
@@ -308,6 +321,11 @@ const stylesM1 = StyleSheet.create({
         borderRadius: 30,
         paddingHorizontal: 15, 
         marginTop: 20
+    },
+    buttomSair: {
+        height: 350,
+        width: '100%',
+        backgroundColor: '#F49D05',
     },
     TextButtom: {
         fontSize: 20,
