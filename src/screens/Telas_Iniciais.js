@@ -19,31 +19,26 @@ class Telas_iniciais extends Component{
 class Login extends Component {
     render(){
         return(
-            
-            <View style={{ flex: 1, backgroundColor: '#ECBF06', justifyContent:"center" }}>
-                <Header/>
-                <View style={stylesMain.container}>
+        <View style={{ flex: 1, backgroundColor: '#ECBF06' }}>
+            <Header/>
+                <View style={{ flex: 1, backgroundColor: '#ECBF06', alignItems: 'center' }}>
                     <Text style={stylesMain.welcome}>Bem Vindo</Text>
                     <TextInput placeholder='N° Telefone' style={stylesMain.input}/>
-                    <TextInput placeholder='Senha' style={stylesMain.input} 
-                    secureTextEntry={true}/>
+                    <TextInput placeholder='Senha' style={stylesMain.input} secureTextEntry={true}/>
                     <Text onPress={() => this.props.navigation.navigate('tela3')} style={{fontSize: 15, marginTop: 15}}>Não possue conta? Cadastre-se</Text>
-                </View>
+                        <View style={styles2.buttoms}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('tela2')} style={styles.container}>
+                                <Text style={styles2.textbuttom}>Login</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('tela7')} style={styles.container1}>
+                                <Text style={styles2.textbuttom}>Login Motorista</Text>
+                            </TouchableOpacity>
+                        </View>
                 
-                <View style={styless.buttomContainer}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('tela2')} style={styles.container}>
-                        <Text style={styles.buttomText} > Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('tela7')} style={styles.container1}>
-                        <Text style={styles.buttomText} > Login Motorista</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View  style={{alignItems: 'center'}}>
-                    <Text  style={styless.texto}>Venha trabalhar conosco!</Text>
-                </View>
-
-            </View>     
+                <Text  style={styless.texto}>Venha trabalhar conosco!</Text>
+                
+                </View> 
+            </View>  
         )
     }
 }
@@ -128,6 +123,8 @@ class Cadastro3 extends Component {
         )
     }
 }
+
+
 
 class Cadastro4 extends Component {
     render(){
@@ -226,7 +223,7 @@ const stylesMain = StyleSheet.create({
         marginRight: 10
     }, 
     welcome: {
-        marginBottom: 50,
+        marginTop: 100,
         fontSize: 30
     },
     cadastro: {
@@ -530,7 +527,7 @@ const styless = StyleSheet.create({
         justifyContent: 'center',
     },
     texto: {
-        marginBottom: 40,
+        marginTop: 200,
         fontSize: 20
     }
 })

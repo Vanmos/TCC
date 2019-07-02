@@ -7,7 +7,8 @@ class Home extends Component {
             
             <View style={{ flex: 1, backgroundColor: '#ECBF06', alignItems:'center', justifyContent: 'center' }}>
                 
-                <Text>Tela Inicial</Text> 
+                <Text>Mapa Do Usuario Aqui</Text> 
+
                 
             </View>
 
