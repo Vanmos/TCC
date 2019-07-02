@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet,TouchableOpacity, Button, TextInput, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Plataform, ListView, TextInput, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Header from '../components/Header/HeaderLogin'
 
 import styles from '../components/Buttom/ButtomLogin/stylesButtom'
 
 import { createSwitchNavigator } from 'react-navigation'
-import Home from './Tela_Usuario';
 import Menu from './Menu';
 
 
@@ -180,31 +179,54 @@ class Tela_Motorista_Inicial extends Component {
 
 
 class Tela_Motorista_Rota extends Component {
+    constructor(props) {
+        super(props);
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2});
+
+        this.state ={
+            dataSource: ds.cloneWithRows([
+                "Próximo Passageiro: Carlos",
+                "Futuro Passageiro: Matheus",
+                "Destino Final: Facear"
+            ])
+        };
+    }
+
+    ListViewItemSeparator = () => {
+        return(
+            <View style={{ height: 0.5, width: "100%" }}/>
+        )
+    }
     render(){
         return(
             <View style={{ flex: 1,alignItems:'center', backgroundColor: '#ECBF06' }}>
-                <View style={stylesM2.header}>
-                    <Text style={stylesM2.text}>Destino Final: Tuiuti</Text>
-                    <Text style={stylesM2.text}>Prox. Passageiro: Carlos</Text>
-                    <Text style={stylesM2.text}>Futuro Passageiro: Matheus</Text>
-                        <View style={stylesM2.buttoms}>
-                            <TouchableOpacity style={stylesM2.buttom}>
-                                <Text style={stylesM2.TextButtom}>Presente</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={stylesM2.buttom2}>
-                                <Text style={stylesM2.TextButtom}>Faltou</Text>
-                            </TouchableOpacity>
-                        </View>
 
-                        <View style={ stylesM2.buttoms }>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('tela7')} style={stylesM2.buttom2}>
-                                    <Text style={stylesM1.TextButtom}>Voltar</Text>
-                                </TouchableOpacity>
-                        </View>
-                    </View>
                     <View style={stylesM2.mapa}>
                         <Text> Mapa do Motorista aqui </Text>
                     </View>
+                    <View style={stylesM2.Bottom}>
+                        <ListView dataSource={this.state.dataSource}
+                         renderSeparator={this.ListViewItemSeparator}
+                         renderRow={ rowData => ( <Text style={stylesM2.rowContainer}> {rowData} </Text>)}/>
+                        {/* <Text style={stylesM2.text}>Prox. Passageiro: Carlos</Text>
+                        <Text style={stylesM2.text}>Futuro Passageiro: Matheus</Text>
+                        <Text style={stylesM2.text}>Destino Final: Tuiuti</Text> */}
+                            <View style={stylesM2.buttoms}>
+                                <TouchableOpacity style={stylesM2.buttom}>
+                                    <Text style={stylesM2.TextButtom}>Presente</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={stylesM2.buttom2}>
+                                    <Text style={stylesM2.TextButtom}>Faltou</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={ stylesM2.buttoms }>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('tela7')} style={stylesM2.buttom3}>
+                                        <Text style={stylesM1.TextButtom}>Voltar</Text>
+                                    </TouchableOpacity>
+                            </View>
+                        </View>
+                    
                    
                 </View>
     
@@ -247,25 +269,27 @@ const stylesMain = StyleSheet.create({
 
 const stylesM2 = StyleSheet.create({
     
-    header: {
+    Bottom: {
         padding: 10,
         backgroundColor: '#ECBF06',
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center', 
-        marginTop: 15,
-        borderBottomColor: 'black',
-        borderBottomWidth: 2
+        alignItems: "flex-start", 
+        marginTop: 265,
+        borderTopWidth: 2,
+        borderTopColor: '#424242'
     },
     buttoms: {
         flexDirection: 'row',
         marginTop: 15,
     },
     text:{
-        fontSize: 20
+        color: 'black',
+        marginTop: 5,
+        fontSize: 16
     },
     buttom: {
-        height: 31,
+        height: 25,
         width: '50%',
         backgroundColor: '#3ADF00',
         borderRadius: 30,
@@ -276,7 +300,7 @@ const stylesM2 = StyleSheet.create({
     },
     buttom2: {
         marginLeft: 5,
-        height: 31,
+        height: 25,
         width: '50%',
         backgroundColor: '#DF0101',
         borderRadius: 30,
@@ -285,8 +309,17 @@ const stylesM2 = StyleSheet.create({
         paddingHorizontal: 15, 
         marginTop: 10
     },
+    buttom3: {
+        height: 25,
+        width: '100%',
+        backgroundColor: '#FF8000',
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10
+    },
     TextButtom: {
-        fontSize: 20,
+        fontSize: 16,
         color: '#FFF',
         alignItems: 'center'
     },
@@ -294,6 +327,9 @@ const stylesM2 = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 200
+    }, 
+    rowContainer: {
+        fontSize: 18
     }
 
 })
@@ -347,7 +383,7 @@ const styles1 = StyleSheet.create({
         width: '90%',
         backgroundColor: '#EEE',
         borderRadius: 30,
-        height: 30,
+        height: 40,
         borderWidth: 1,
         borderColor: '#333',
     },
@@ -396,7 +432,7 @@ const styles2 = StyleSheet.create({
         width: '90%',
         backgroundColor: '#EEE',
         borderRadius: 30,
-        height: 30,
+        height: 40,
         borderWidth: 1,
         borderColor: '#333',
     },
@@ -447,7 +483,7 @@ const styles3 = StyleSheet.create({
         width: '70%',
         backgroundColor: '#EEE',
         borderRadius: 30,
-        height: 30,
+        height: 40,
         borderWidth: 1,
         borderColor: '#333',
     },
@@ -456,7 +492,7 @@ const styles3 = StyleSheet.create({
         width: '30%',
         backgroundColor: '#EEE',
         borderRadius: 30,
-        height: 30,
+        height: 40,
         borderWidth: 1,
         borderColor: '#333',
     },
@@ -504,7 +540,7 @@ const styles4 = StyleSheet.create({
         width: '90%',
         backgroundColor: '#EEE',
         borderRadius: 30,
-        height: 30,
+        height: 40,
         borderWidth: 1,
         borderColor: '#333',
     },
